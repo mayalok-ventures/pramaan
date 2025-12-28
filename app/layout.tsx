@@ -19,19 +19,23 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    return (
-        <ClerkProvider>
-            <html lang="en">
-                <body className={inter.className}>
-                    <ReactQueryProvider>
-                        <MaybeNavbar />
-                        <main className="min-h-screen bg-gray-50">
-                            {children}
-                        </main>
-                        <Toaster />
-                    </ReactQueryProvider>
-                </body>
-            </html>
-        </ClerkProvider>
+    const content = (
+        <html lang="en">
+            <body className={inter.className}>
+                <ReactQueryProvider>
+                    <MaybeNavbar />
+                    <main className="min-h-screen bg-gray-50">
+                        {children}
+                    </main>
+                    <Toaster />
+                </ReactQueryProvider>
+            </body>
+        </html>
     );
+
+    if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
+        return content;
+    }
+
+    return <ClerkProvider>{content}</ClerkProvider>;
 }
