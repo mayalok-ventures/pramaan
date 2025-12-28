@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
